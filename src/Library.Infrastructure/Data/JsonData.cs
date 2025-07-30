@@ -201,6 +201,11 @@ public class JsonData
         return populated;
     }
 
+    public Book? SearchBookByTitle(string title)
+    {
+        return Books?.FirstOrDefault(b => b.Title.Equals(title, StringComparison.OrdinalIgnoreCase));
+    }
+
     private async Task<T?> LoadJson<T>(string filePath)
     {
         using (FileStream jsonStream = File.OpenRead(filePath))
@@ -208,5 +213,7 @@ public class JsonData
             return await JsonSerializer.DeserializeAsync<T>(jsonStream);
         }
     }
+
+    
 
 }
